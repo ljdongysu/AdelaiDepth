@@ -1,7 +1,7 @@
 import os
 import numpy as np
 import torch
-from torchsparse import SparseTensor
+from torch_sparse import SparseTensor
 from torchsparse.utils import sparse_collate_fn, sparse_quantize
 from plyfile import PlyData, PlyElement
 
