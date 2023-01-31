@@ -76,6 +76,7 @@ def generate_depth(imgs_list, depth_list, depth_model):
         pred_depth_ori = cv2.resize(pred_depth, (rgb.shape[1], rgb.shape[0]))
 
         write_name = depth_list[i].replace(".jpg",".png")
+        write_name = write_name.split()[0]
         cv2.imwrite(write_name, (pred_depth_ori/pred_depth_ori.max() * 60000).astype(np.uint16))
 
 
