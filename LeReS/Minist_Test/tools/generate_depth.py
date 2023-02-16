@@ -5,6 +5,7 @@ import numpy as np
 import torch
 import matplotlib.pyplot as plt
 import torchvision.transforms as transforms
+from tqdm import tqdm
 
 from lib.multi_depth_model_woauxi import RelDepthModel
 from lib.net_tools import load_ckpt
@@ -56,7 +57,7 @@ def get_file_name(file_name, image_path):
     depth_list = []
     for image_name in file_lists:
         image_full_path = os.path.join(image_path, image_name)
-        image_dest_path = image_full_path.replace("REMAP", "DEPTH")
+        image_dest_path = image_full_path.replace("REMAP", "DEPTH/AdelaiDepth")
         MkdirSimple(image_dest_path)
         image_list.append(image_full_path)
         depth_list.append(image_dest_path)
@@ -65,7 +66,7 @@ def get_file_name(file_name, image_path):
 
 
 def generate_depth(imgs_list, depth_list, depth_model):
-    for i, v in enumerate(imgs_list):
+    for i, v in enumerate(tqdm(imgs_list)):
         print('processing (%04d)-th image... %s' % (i, v))
         rgb = cv2.imread(v.split()[0])
         rgb_c = rgb[:, :, ::-1].copy()
